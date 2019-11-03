@@ -5,14 +5,11 @@ import org.serasmi.api.articles.model.Article;
 import org.serasmi.api.articles.service.ArticleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
-@Controller
-@RequestMapping("article")
+@RestController
 public class ArticleController {
+
   private final ArticleService articleService;
 
   @Autowired
@@ -20,14 +17,22 @@ public class ArticleController {
     this.articleService = articleService;
   }
 
-  @PostMapping
-  public void addArticle(Article article) {
-    articleService.addArticle(article);
-  }
+  // Aggregate root
 
-  @GetMapping
-  @ResponseBody
+  @GetMapping("/articles")
   public List<Article> getAllArticles() {
     return articleService.getAllArticles();
+  }
+
+  @PostMapping("/articles")
+  public int addArticle(@RequestBody Article article) {
+    return articleService.addArticle(article);
+  }
+
+  // Single item
+
+  @GetMapping("/articles/{id}")
+  public Article getArticle(@PathVariable Long id) {
+    return articleService.getArticle(id);
   }
 }

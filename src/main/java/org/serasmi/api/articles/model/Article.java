@@ -1,28 +1,30 @@
 package org.serasmi.api.articles.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+
 import java.sql.Date;
+import java.time.LocalDate;
 
 public class Article {
-  private final int id;
+
+  private final Long id;
   private final String title;
   private final String content;
   private final Date createdAt;
-  private final int createdBy;
+  private final int user;
 
-  public Article(@JsonProperty("id") int id,
-      @JsonProperty("title") String title,
-      @JsonProperty("content") String content,
-      @JsonProperty("createdAt") Date createdAt,
-      @JsonProperty("createdBy") int createdBy) {
+  public Article(@JsonProperty("id") Long id,
+                 @JsonProperty("title") String title,
+                 @JsonProperty("content") String content,
+                 @JsonProperty("user") int user) {
     this.id = id;
     this.title = title;
     this.content = content;
-    this.createdAt = createdAt;
-    this.createdBy = createdBy;
+    this.createdAt = Date.valueOf(LocalDate.now());
+    this.user = user;
   }
 
-  public int getId() {
+  public Long getId() {
     return id;
   }
 
@@ -38,7 +40,7 @@ public class Article {
     return createdAt;
   }
 
-  public int getCreatedBy() {
-    return createdBy;
+  public int getUser() {
+    return user;
   }
 }

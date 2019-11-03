@@ -12,15 +12,19 @@ public class ArticleService {
   private final ArticleDao articleDao;
 
   @Autowired
-  public ArticleService(@Qualifier("postgresArticleData") ArticleDao articleDao) {
+  public ArticleService(@Qualifier("fakeArticleData") ArticleDao articleDao) {
     this.articleDao = articleDao;
   }
 
-  public void addArticle(Article article) {
-    articleDao.insertArticle(article);
+  public int addArticle(Article article) {
+    return articleDao.insertArticle(article);
   }
 
   public List<Article> getAllArticles() {
     return articleDao.getAllArticles();
+  }
+
+  public Article getArticle(Long id) {
+    return articleDao.getArticle(id);
   }
 }

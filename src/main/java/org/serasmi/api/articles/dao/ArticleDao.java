@@ -7,4 +7,6 @@ public interface ArticleDao {
   int insertArticle(Article article);
 
   List<Article> getAllArticles();
+
+  Article getArticle(Long id);
 }

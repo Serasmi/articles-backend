@@ -1,31 +1,34 @@
 package org.serasmi.api.articles.dao;
 
-import java.util.ArrayList;
-import java.util.List;
 import org.serasmi.api.articles.model.Article;
 import org.springframework.stereotype.Repository;
 
-@Repository("postgresArticleData")
-public class PostgresArticleDataAccessService implements ArticleDao {
-  // TODO: connect to DB here
+import java.util.ArrayList;
+import java.util.List;
+
+@Repository("fakeArticleData")
+public class FakeArticleDataAccessService implements ArticleDao{
   private static List<Article> DB = new ArrayList<>();
 
   @Override
   public int insertArticle(Article article) {
-    // TODO: insert data to DB here
     DB.add(article);
     return DB.size();
   }
 
   @Override
   public List<Article> getAllArticles() {
-    // TODO: return all articles here
     return DB;
   }
 
   @Override
   public Article getArticle(Long id) {
-    // TODO: return article with `id`
-    return DB.get(id.intValue());
+    try {
+      return DB.get(id.intValue());
+    } catch (IndexOutOfBoundsException e) {
+      e.printStackTrace();
+    }
+
+    return null;
   }
 }

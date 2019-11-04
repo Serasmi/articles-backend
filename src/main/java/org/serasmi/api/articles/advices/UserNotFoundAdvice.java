@@ -25,7 +25,7 @@ public class UserNotFoundAdvice {
     private String error;
 
     ResponseUserNotFound() {
-      this.error = "Not found";
+      this.error = HttpStatus.NOT_FOUND.toString();
     }
 
     ResponseUserNotFound(String error) {

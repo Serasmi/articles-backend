@@ -1,7 +1,5 @@
 package org.serasmi.api.articles.api;
 
-import org.serasmi.api.articles.repository.UserRepository;
-import org.serasmi.api.articles.exceptions.UserNotFoundException;
 import org.serasmi.api.articles.model.User;
 import org.serasmi.api.articles.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;

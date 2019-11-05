@@ -8,3 +8,4 @@ CREATE TABLE articles(
    userId integer REFERENCES users
 );
 GRANT SELECT, UPDATE, INSERT, DELETE ON articles TO article_user;
+GRANT USAGE, SELECT ON SEQUENCE articles_id_seq TO article_user;

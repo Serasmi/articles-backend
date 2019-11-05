@@ -1,5 +1,6 @@
 package org.serasmi.api.articles.model;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -15,7 +16,7 @@ public class User {
 
   public User() {}
 
-  public User(String name, Long role) {
+  public User(@JsonProperty("name") String name, @JsonProperty("role") Long role) {
     this.name = name;
     this.role = role;
   }

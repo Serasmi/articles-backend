@@ -1,3 +1,5 @@
+\c articles;
+
 -- Create roles
 insert into roles (name) values ('admin'), ('user');
 

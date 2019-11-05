@@ -1,3 +1,5 @@
+\c articles;
+
 CREATE TABLE users(
    id serial PRIMARY KEY,
    name varchar(50) UNIQUE NOT NULL,

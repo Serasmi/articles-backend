@@ -1,3 +1,5 @@
+\c articles;
+
 CREATE TABLE articles(
    id serial PRIMARY KEY,
    title varchar(255) NOT NULL,

@@ -9,17 +9,17 @@ public class Article {
 
   private final Long id;
   private final String title;
-  private final String content;
+  private final String link;
   private final Date createdAt;
   private final int user;
 
   public Article(@JsonProperty("id") Long id,
                  @JsonProperty("title") String title,
-                 @JsonProperty("content") String content,
+                 @JsonProperty("content") String link,
                  @JsonProperty("user") int user) {
     this.id = id;
     this.title = title;
-    this.content = content;
+    this.link = link;
     this.createdAt = Date.valueOf(LocalDate.now());
     this.user = user;
   }
@@ -32,8 +32,8 @@ public class Article {
     return title;
   }
 
-  public String getContent() {
-    return content;
+  public String getLink() {
+    return link;
   }
 
   public Date getCreatedAt() {

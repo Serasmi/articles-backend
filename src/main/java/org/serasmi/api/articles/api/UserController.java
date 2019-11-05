@@ -1,8 +1,10 @@
 package org.serasmi.api.articles.api;
 
-import org.serasmi.api.articles.dao.UserRepository;
+import org.serasmi.api.articles.repository.UserRepository;
 import org.serasmi.api.articles.exceptions.UserNotFoundException;
 import org.serasmi.api.articles.model.User;
+import org.serasmi.api.articles.service.UserService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -11,29 +13,30 @@ import java.util.List;
 @RequestMapping("/users")
 public class UserController {
 
-  private final UserRepository repository;
+  private final UserService service;
 
-  public UserController(UserRepository repository) {
-    this.repository = repository;
+  @Autowired
+  public UserController(UserService service) {
+    this.service = service;
   }
 
   @GetMapping
   public List<User> getAll() {
-    return repository.findAll();
+    return service.getAll();
   }
 
   @PostMapping
   public User create(@RequestBody User newUser) {
-    return repository.save(newUser);
+    return service.create(newUser);
   }
 
   @GetMapping(value = "/{id}")
   public User get(@PathVariable Long id) {
-    return repository.findById(id).orElseThrow(() -> new UserNotFoundException(id));
+    return service.get(id);
   }
 
   @DeleteMapping(value = "/{id}")
   public void delete(@PathVariable Long id) {
-    repository.deleteById(id);
+    service.delete(id);
   }
 }

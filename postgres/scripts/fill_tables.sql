@@ -7,7 +7,7 @@ insert into roles (name) values ('admin'), ('user');
 insert into users (name, role) values ('admin', 1), ('zoomer', 1), ('serasmi', 2);
 
 -- Create articles
-insert into articles (title, link, userId) values
+insert into articles (title, link, user_id) values
     ('Title of article #1', 'http://some-article-url.org/article1', 2),
     ('Title of article #2', 'http://some-article-url.org/article2', 3),
     ('Title of article #3', 'http://some-article-url.org/article3', 3),

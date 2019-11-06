@@ -4,36 +4,36 @@ import java.util.List;
 import org.serasmi.api.articles.model.Article;
 import org.serasmi.api.articles.service.ArticleService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/articles")
 public class ArticleController {
 
-  private final ArticleService articleService;
+  private ArticleService service;
 
   @Autowired
   public ArticleController(ArticleService articleService) {
-    this.articleService = articleService;
+    this.service = articleService;
   }
 
-  // Aggregate root
-
-  @GetMapping("/articles")
-  public List<Article> getAllArticles() {
-    return articleService.getAllArticles();
+  @GetMapping
+  public List<Article> getAll() {
+    return service.getAll();
   }
 
-  @PostMapping("/articles")
-  public int addArticle(@RequestBody Article article) {
-    return articleService.addArticle(article);
+  @PostMapping
+  public Article create(@RequestBody Article newArticle) {
+    return service.create(newArticle);
   }
 
-  // Single item
+  @GetMapping("/{id}")
+  public Article get(@PathVariable Long id) {
+    return service.get(id);
+  }
 
-  @GetMapping("/articles/{id}")
-  public Article getArticle(@PathVariable Long id) {
-    return articleService.getArticle(id);
+  @DeleteMapping("/{id}")
+  public void delete(@PathVariable Long id) {
+    service.delete(id);
   }
 }

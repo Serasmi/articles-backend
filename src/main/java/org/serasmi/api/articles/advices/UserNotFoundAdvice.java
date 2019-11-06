@@ -1,6 +1,5 @@
 package org.serasmi.api.articles.advices;
 
-import lombok.Data;
 import org.serasmi.api.articles.exceptions.UserNotFoundException;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ControllerAdvice;

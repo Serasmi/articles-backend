@@ -1,46 +1,29 @@
 package org.serasmi.api.articles.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import lombok.Data;
 
-import java.sql.Date;
-import java.time.LocalDate;
+import javax.persistence.*;
+import java.sql.Timestamp;
 
+@Data
+@Entity
+@Table(name = "articles")
 public class Article {
 
-  private final Long id;
-  private final String title;
-  private final String link;
-  private final Date createdAt;
-  private final int user;
+  private @Id @GeneratedValue(strategy = GenerationType.IDENTITY) Long id;
+  private String title;
+  private String link;
+  private Timestamp createdAt;
+  private Long userId;
 
-  public Article(@JsonProperty("id") Long id,
-                 @JsonProperty("title") String title,
-                 @JsonProperty("content") String link,
-                 @JsonProperty("user") int user) {
-    this.id = id;
+  public Article() {}
+
+  public Article(@JsonProperty("title") String title,
+                 @JsonProperty("link") String link,
+                 @JsonProperty("user_id") Long userId) {
     this.title = title;
     this.link = link;
-    this.createdAt = Date.valueOf(LocalDate.now());
-    this.user = user;
-  }
-
-  public Long getId() {
-    return id;
-  }
-
-  public String getTitle() {
-    return title;
-  }
-
-  public String getLink() {
-    return link;
-  }
-
-  public Date getCreatedAt() {
-    return createdAt;
-  }
-
-  public int getUser() {
-    return user;
+    this.userId = userId;
   }
 }

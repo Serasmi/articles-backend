@@ -30,12 +30,12 @@ public class RoleController {
     return service.create(newRole);
   }
 
-  @GetMapping(value = "/{id}")
+  @GetMapping("/{id}")
   public Role get(@PathVariable Long id) {
     return service.get(id);
   }
 
-  @DeleteMapping(value = "/{id}")
+  @DeleteMapping("/{id}")
   public void delete(@PathVariable Long id) {
     service.delete(id);
   }

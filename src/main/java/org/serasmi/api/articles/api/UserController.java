@@ -28,12 +28,12 @@ public class UserController {
     return service.create(newUser);
   }
 
-  @GetMapping(value = "/{id}")
+  @GetMapping("/{id}")
   public User get(@PathVariable Long id) {
     return service.get(id);
   }
 
-  @DeleteMapping(value = "/{id}")
+  @DeleteMapping("/{id}")
   public void delete(@PathVariable Long id) {
     service.delete(id);
   }

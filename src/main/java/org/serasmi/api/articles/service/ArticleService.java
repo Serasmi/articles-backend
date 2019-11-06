@@ -1,30 +1,33 @@
 package org.serasmi.api.articles.service;
 
 import java.util.List;
-import org.serasmi.api.articles.dao.ArticleDao;
+import org.serasmi.api.articles.exceptions.ArticleNotFoundException;
 import org.serasmi.api.articles.model.Article;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
+import org.serasmi.api.articles.repository.ArticleRepository;
 import org.springframework.stereotype.Service;
 
 @Service
 public class ArticleService {
-  private final ArticleDao articleDao;
 
-  @Autowired
-  public ArticleService(@Qualifier("fakeArticleData") ArticleDao articleDao) {
-    this.articleDao = articleDao;
+  private final ArticleRepository repository;
+
+  public ArticleService(ArticleRepository repository) {
+    this.repository = repository;
   }
 
-  public int addArticle(Article article) {
-    return articleDao.insertArticle(article);
+  public List<Article> getAll() {
+    return repository.findAll();
   }
 
-  public List<Article> getAllArticles() {
-    return articleDao.getAllArticles();
+  public Article create(Article newArticle) {
+    return repository.save(newArticle);
   }
 
-  public Article getArticle(Long id) {
-    return articleDao.getArticle(id);
+  public Article get(Long id) {
+    return repository.findById(id).orElseThrow(() -> new ArticleNotFoundException(id ));
+  }
+
+  public void delete(Long id) {
+    repository.deleteById(id);
   }
 }

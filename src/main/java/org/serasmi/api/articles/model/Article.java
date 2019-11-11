@@ -11,7 +11,8 @@ import java.sql.Timestamp;
 @Table(name = "articles")
 public class Article {
 
-  private @Id @GeneratedValue(strategy = GenerationType.IDENTITY) Long id;
+  @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+  private Long id;
   private String title;
   private String link;
   private Timestamp createdAt;

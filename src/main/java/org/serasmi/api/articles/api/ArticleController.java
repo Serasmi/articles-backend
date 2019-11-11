@@ -1,5 +1,6 @@
 package org.serasmi.api.articles.api;
 
+import java.security.Principal;
 import java.util.List;
 import org.serasmi.api.articles.model.Article;
 import org.serasmi.api.articles.service.ArticleService;

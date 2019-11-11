@@ -10,7 +10,8 @@ import javax.persistence.*;
 @Table(name = "users")
 public class User {
 
-  private @Id @GeneratedValue(strategy = GenerationType.IDENTITY) Long id;
+  @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+  private Long id;
   private String name;
   private Long role;
 

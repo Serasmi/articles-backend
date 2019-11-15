@@ -1,0 +1,38 @@
+version: '3.7'
+
+services:
+  app:
+    build:
+      context: .
+    container_name: articles_backend
+    ports:
+      - "8080:8080"
+    networks:
+      - articles_backend
+    depends_on:
+      - db
+    restart: on-failure
+
+  db:
+    image: postgres
+    container_name: articles_postgres
+    restart: on-failure
+    ports:
+      - "5432:5432"
+    networks:
+      - articles_backend
+    environment:
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+    volumes:
+      - my_dbdata:/var/lib/postgresql/data
+      - ./postgres/scripts/init.sql:/docker-entrypoint-initdb.d/01-init.sql
+      - ./postgres/scripts/roles_table.sql:/docker-entrypoint-initdb.d/02-roles_table.sql
+      - ./postgres/scripts/users_table.sql:/docker-entrypoint-initdb.d/03-users_table.sql
+      - ./postgres/scripts/articles_table.sql:/docker-entrypoint-initdb.d/04-articles_table.sql
+      - ./postgres/scripts/fill_tables.sql:/docker-entrypoint-initdb.d/05-fill_tables.sql
+
+networks:
+  articles_backend: {}
+
+volumes:
+  my_dbdata:

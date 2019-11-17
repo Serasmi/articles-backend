@@ -27,6 +27,20 @@ public class ArticleService {
     return repository.findById(id).orElseThrow(() -> new ArticleNotFoundException(id ));
   }
 
+  public Article update(Article newArticle, Long id) {
+    return repository.findById(id)
+        .map(article -> {
+          article.setTitle(newArticle.getTitle());
+          article.setLink(newArticle.getLink());
+
+          return repository.save(article);
+        })
+        .orElseGet(() -> {
+          newArticle.setId(id);
+          return repository.save(newArticle);
+        });
+  }
+
   public void delete(Long id) {
     repository.deleteById(id);
   }

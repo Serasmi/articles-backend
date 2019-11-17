@@ -33,6 +33,11 @@ public class ArticleController {
     return service.get(id);
   }
 
+  @PutMapping("/{id}")
+  public Article update(@RequestBody Article newArticle, @PathVariable Long id) {
+    return service.update(newArticle, id);
+  }
+
   @DeleteMapping("/{id}")
   public void delete(@PathVariable Long id) {
     service.delete(id);

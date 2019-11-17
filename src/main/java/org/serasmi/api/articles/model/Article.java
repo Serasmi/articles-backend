@@ -2,6 +2,7 @@ package org.serasmi.api.articles.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
+import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
@@ -19,6 +20,7 @@ public class Article {
   private Long id;
   private String title;
   private String link;
+  @CreationTimestamp
   private Timestamp createdAt;
   private Long userId;
 
@@ -27,7 +29,9 @@ public class Article {
   public Article(@JsonProperty("title") String title,
                  @JsonProperty("link") String link,
                  @JsonProperty("user_id") Long userId) {
-    this.title = Optional.ofNullable(title).orElse(DEFAULT_TITLE + " - " + new Date());
+    Timestamp currentTime = new Timestamp(new Date().getTime());
+
+    this.title = Optional.ofNullable(title).orElse(DEFAULT_TITLE + " - " + currentTime);
     this.link = link;
     this.userId = Optional.ofNullable(userId).orElse(3L); // TODO: remove hardcoded userId
   }
